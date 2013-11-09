@@ -1,5 +1,8 @@
 #include "vulcan.h"
 
+// Traces with this debug level and below display
+int GlobalDebugLevel = DBGLVL_VERBOSE;
+
 int main(int argc, char* argv)
 {
 	char* rom = (char*)LoadRomIntoBuffer("..\\..\\ROM\\Super Mario Land (World).gb");
