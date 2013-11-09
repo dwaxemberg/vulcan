@@ -16,3 +16,19 @@
 *.exe
 *.out
 *.app
+
+# Visual Studio Stuff
+*.pdb
+*.projdata
+*.suo
+*.ilk
+*.pch
+*.idb
+*.clw
+*.aps
+*.plg
+*.ncb
+*.proj.*.user
+*.proj.user
+*.positions
+
