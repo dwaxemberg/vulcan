@@ -304,5 +304,206 @@ unsigned char CodeArgLength(short opCode) {
 	case 0x2B:
 	case 0x3B:
 		return 0;
+
+		//////// Miscellaneous ////////
+	// SWAP n --> n is a register
+	case 0xCB37:
+	case 0xCB30:
+	case 0xCB31:
+	case 0xCB32:
+	case 0xCB33:
+	case 0xCB34:
+	case 0xCB35:
+	case 0xCB36:	
+	// DAA
+	case 0x27:
+	// CPL
+	case 0x2F:
+	// CCF
+	case 0x3F:
+	// SCF
+	case 0x37:
+	// NOP
+	case 0x00:
+	// HALT
+	case 0x76:
+	// STOP
+	case 0x1000:
+	// DI
+	case 0xF3:
+	// EI
+	case 0xFB:
+		return 0;
+
+		//////// Rotates and Shifts ////////
+	// RLCA
+	case 0x07:
+	// RLA
+	case 0x17:
+	// RRCA
+	case 0x0F:
+	// RRA
+	case 0x1F:
+	// RLC n --> n is a register
+	case 0xCB07:
+	case 0xCB00:
+	case 0xCB01:
+	case 0xCB02:
+	case 0xCB03:
+	case 0xCB04:
+	case 0xCB05:
+	case 0xCB06:
+	// RL n --> n is a register
+	case 0xCB17:
+	case 0xCB10:
+	case 0xCB11:
+	case 0xCB12:
+	case 0xCB13:
+	case 0xCB14:
+	case 0xCB15:
+	case 0xCB16:
+	// RRC n --> n is a register
+	case 0xCB0F:
+	case 0xCB08:
+	case 0xCB09:
+	case 0xCB0A:
+	case 0xCB0B:
+	case 0xCB0C:
+	case 0xCB0D:
+	case 0xCB0E:
+	// RR n --> n is a register
+	case 0xCB1F:
+	case 0xCB18:
+	case 0xCB19:
+	case 0xCB1A:
+	case 0xCB1B:
+	case 0xCB1C:
+	case 0xCB1D:
+	case 0xCB1E:
+	// SLA n --> n is a register
+	case 0xCB27:
+	case 0xCB20:
+	case 0xCB21:
+	case 0xCB22:
+	case 0xCB23:
+	case 0xCB24:
+	case 0xCB25:
+	case 0xCB26:
+	// SRA n --> n is a register
+	case 0xCB2F:
+	case 0xCB28:
+	case 0xCB29:
+	case 0xCB2A:
+	case 0xCB2B:
+	case 0xCB2C:
+	case 0xCB2D:
+	case 0xCB2E:
+	// SRL n --> n is a register
+	case 0xCB3F:
+	case 0xCB38:
+	case 0xCB39:
+	case 0xCB3A:
+	case 0xCB3B:
+	case 0xCB3C:
+	case 0xCB3D:
+	case 0xCB3E:
+		return 0;
+
+		//////// Bit Opcodes ////////
+	// BIT b,r --> b is a byte, r is a register
+	case 0xCB47:
+	case 0xCB40:
+	case 0xCB41:
+	case 0xCB42:
+	case 0xCB43:
+	case 0xCB44:
+	case 0xCB45:
+	case 0xCB46:
+		return 1;
+
+	// SET b,r --> b is a byte, r is a register
+	case 0xCBC7:
+	case 0xCBC0:
+	case 0xCBC1:
+	case 0xCBC2:
+	case 0xCBC3:
+	case 0xCBC4:
+	case 0xCBC5:
+	case 0xCBC6:
+		return 1;
+
+	// RES b,r --> b is a byte, r is a register
+	case 0xCB87:
+	case 0xCB80:
+	case 0xCB81:
+	case 0xCB82:
+	case 0xCB83:
+	case 0xCB84:
+	case 0xCB85:
+	case 0xCB86:
+		return 1;
+
+		//////// Jumps ////////
+	// JP nn --> nn is a 2 byte immediate value (LS byte first)
+	case 0xC3:
+		return 2;
+	
+	// JP cc,nn --> nn is a 2 byte immediate value (LS byte first)
+	case 0xC2:
+	case 0xCA:
+	case 0xD2:
+	case 0xDA:
+		return 2;
+
+	// JP (HL)
+	case 0xE9:
+		return 0;
+
+	// JR n --> n is one byte signed immediate value
+	case 0x18:
+		return 1;
+
+	// JR cc,n --> n is one byte signed immediate value
+	case 0x20:
+	case 0x28:
+	case 0x30:
+	case 0x38:
+		return 1;
+
+		//////// Calls ////////
+	// CALL nn --> nn is 2 byte immediate value (LS byte first)
+	case 0xCD:
+		return 2;
+
+	// CALL cc,nn --> nn is 2 byte immediate value (LS byte first)
+	case 0xC4:
+	case 0xCC:
+	case 0xD4:
+	case 0xDC:
+		return 2;
+
+		//////// Restarts ////////
+	// RST n --> n is a restart address
+	case 0xC7:
+	case 0xCF:
+	case 0xD7:
+	case 0xDF:
+	case 0xE7:
+	case 0xEF:
+	case 0xF7:
+	case 0xFF:
+		return 0;
+
+		//////// Returns ////////
+	// RET
+	case 0xc9:
+	// RET cc
+	case 0xC0:
+	case 0xC8:
+	case 0xD0:
+	case 0xD8:
+	// RETI
+	case 0xD9:
+		return 0;
 	}
 }
