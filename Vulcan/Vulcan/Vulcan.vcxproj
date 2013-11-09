@@ -83,6 +83,7 @@
     <ClCompile Include="romloader.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cpu.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="hardware.h" />
     <ClInclude Include="vulcan.h" />
