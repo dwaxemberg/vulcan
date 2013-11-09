@@ -80,13 +80,14 @@ unsigned char CodeArgLength(short opCode) {
 	case 0x2E:
 		return 1;
 	
-	// LD A, n --> n is register or 2 byte value LS byte first
+	// LD A, n --> n is register, 2 byte value LS byte first, or # (unsigned immediate value)
 	case 0x0A:
 	case 0x1A:
 		return 0;
 	case 0xFA:
-	case 0x3E: // TODO: figure out what # means
 		return 2;
+	case 0x3E:
+		return 1;
 	
 	// LD n, A --> n is a pair of registers or 2 byte value (LS byte first)
 	case 0x02:
@@ -163,8 +164,9 @@ unsigned char CodeArgLength(short opCode) {
 	case 0x84:
 	case 0x85:
 	case 0x86:
-	case 0xC6: //TODO: figure out what # is
 		return 0;
+	case 0xC6:
+		return 1;
 
 	// ADC A,n --> n is a register or #
 	case 0x8F:
@@ -175,8 +177,9 @@ unsigned char CodeArgLength(short opCode) {
 	case 0x8C:
 	case 0x8D:
 	case 0x8E:
-	case 0xCE: //TODO: figure out what # is
 		return 0;
+	case 0xCE:
+		return 1;
 
 	// SUB n --> n is a register or #
 	case 0x97:
@@ -187,8 +190,9 @@ unsigned char CodeArgLength(short opCode) {
 	case 0x94:
 	case 0x95:
 	case 0x96:
-	case 0xD6: //TODO: figure out what # is
 		return 0;
+	case 0xD6:
+		return 1;
 
 	// SBC A,n --> n is a register
 	case 0x9F:
@@ -210,8 +214,9 @@ unsigned char CodeArgLength(short opCode) {
 	case 0xA4:
 	case 0xA5:
 	case 0xA6:
-	case 0xE6: //TODO: figure out what # is
 		return 0;
+	case 0xE6:
+		return 1;
 
 	// OR n --> n is a register or #
 	case 0xB7:
@@ -222,8 +227,9 @@ unsigned char CodeArgLength(short opCode) {
 	case 0xB4:
 	case 0xB5:
 	case 0xB6:
-	case 0xF6: //TODO: figure out what # is
 		return 0;
+	case 0xF6:
+		return 1;
 
 	// XOR n -- n is a register or #
 	case 0xAF:
@@ -234,8 +240,9 @@ unsigned char CodeArgLength(short opCode) {
 	case 0xAC:
 	case 0xAD:
 	case 0xAE:
-	case 0xEE: //TODO: figure out what # is
 		return 0;
+	case 0xEE: 
+		return 1;
 
 	// CP n --> n is a register or #
 	case 0xBF:
@@ -246,8 +253,9 @@ unsigned char CodeArgLength(short opCode) {
 	case 0xBC:
 	case 0xBD:
 	case 0xBE:
-	case 0xFE: //TODO: figure out what # is
 		return 0;
+	case 0xFE:
+		return 1;
 
 	// INC n --> is a register
 	case 0x3C:

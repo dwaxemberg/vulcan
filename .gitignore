@@ -1,6 +1,7 @@
 # Object files
 *.o
 *.ko
+*.obj
 
 # Libraries
 *.lib
@@ -31,4 +32,5 @@
 *.proj.*.user
 *.proj.user
 *.positions
+
 
