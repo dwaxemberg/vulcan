@@ -5,6 +5,7 @@
 // Vulcan headers
 #include "hardware.h"
 #include "debug.h"
+#include "cpu.h"
 
 // C standard library headers
 #include <stdio.h>
@@ -21,6 +22,8 @@
 #define TO_SHORT(x) (*((short*)(x)))
 #define TO_UCHAR(x) (*((unsigned char*)(x)))
 #define TO_CHAR(x) (*((char*)(x)))
+#define FUSED_REG_TO_UCHAR(x) TO_UCHAR(TranslateAddress((x)))
+#define FUSED_REG_TO_USHORT(x) TO_SHORT(TranslateAddress((x)))
 
 // romloader.c definitions
 void* LoadRomIntoBuffer(const char* filePath);

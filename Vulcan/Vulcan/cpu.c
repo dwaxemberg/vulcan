@@ -1,7 +1,25 @@
+#include "vulcan.h"
+
+GB_CPU cpu;
 
 int HandleOps(/*TODO:fix this arg*/short opCode) {
 	switch (opCode) {
+		// LD A, (BC)
+		cpu.rA = FUSED_REG_TO_UCHAR(cpu.rBC);
 
+		// LD (BC), A
+		FUSED_REG_TO_UCHAR(cpu.rBC) = cpu.rA;
+
+		// LD BC, nn
+		cpu.rBC = 0x1234;
+
+		// PUSH AF
+		cpu.rSP -= 2;
+		FUSED_REG_TO_USHORT(cpu.rSP) = cpu.rAF;
+
+		// POP AF
+		cpu.rAF = FUSED_REG_TO_USHORT(cpu.rSP);
+		cpu.rSP += 2;
 	}
 }
 
