@@ -24,9 +24,18 @@
     <ClCompile Include="cpu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="memory.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vulcan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hardware.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
