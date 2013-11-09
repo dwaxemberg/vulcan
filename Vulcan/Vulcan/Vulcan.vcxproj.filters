@@ -19,6 +19,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="romloader.c">
+	<Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cpu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="memory.c">

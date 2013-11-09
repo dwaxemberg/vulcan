@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cpu.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="memory.c" />
     <ClCompile Include="romloader.c" />
