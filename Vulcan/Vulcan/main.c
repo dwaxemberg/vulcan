@@ -33,5 +33,7 @@ int main(int argc, char* argv)
 		printf("\n");
 	}
 
+	printf("%x", CHARS_TO_SHORT(0xF0, 0xFF));
+
 	return 0;
 }
