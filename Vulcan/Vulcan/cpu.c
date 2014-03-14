@@ -2,9 +2,9 @@
 
 GB_CPU cpu;
 
-int HandleOps(char* programCode) {
-	char* regs[8] = { cpu.rB, cpu.rC, cpu.rD, cpu.rE, cpu.rH, cpu.rL, cpu.rHL, cpu.rA };
-	char n;
+int HandleOps(unsigned char* programCode) {
+	unsigned char regs[8] = { cpu.rB, cpu.rC, cpu.rD, cpu.rE, cpu.rH, cpu.rL, cpu.rHL, cpu.rA };
+	unsigned char n;
 	switch (programCode[0]) {
 		// LD A, (BC)
 		/*cpu.rA = FUSED_REG_TO_UCHAR(cpu.rBC);
@@ -152,7 +152,7 @@ int HandleOps(char* programCode) {
 		TO_USHORT(TranslateAddress(CHARS_TO_SHORT(programCode[1], programCode[2]))) = cpu.rA;
 		return 3;
 	case 0xF2: // LD A,(C)
-		cpu.rA = TranslateAddress(0xFF00 + cpu.rC);
+		cpu.rA = TO_UCHAR(TranslateAddress(0xFF00 + cpu.rC));
 		return 1;
 	case 0xE2: // LD (C),A
 		TO_UCHAR(TranslateAddress(0xFF00 + cpu.rC)) = cpu.rA;
