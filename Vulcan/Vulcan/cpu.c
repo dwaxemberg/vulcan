@@ -23,6 +23,8 @@ int HandleOps(unsigned char* programCode) {
 		cpu.rAF = FUSED_REG_TO_USHORT(cpu.rSP);
 		cpu.rSP += 2;
 		*/
+	
+#pragma region 8 bit loads		
 		//////// 8 - bit loads ////////	
 		// LD nn,n --> nn is a register, n is a 1 byte immediate value
 	case 0x06:
@@ -180,10 +182,15 @@ int HandleOps(unsigned char* programCode) {
 
 		// LD (n),A --> n is one byte immediate value
 	case 0xE0:
+		TO_UCHAR(TranslateAddress(0xFF00 + programCode[1])) = cpu.rA;
+		return 2;
 		// LD A,(n) --> n is one byte immediate value
 	case 0xF0:
-		return 1;
+		cpu.rA = TO_UCHAR(TranslateAddress(0xFF00 + programCode[1]));
+		return 2;
+#pragma endregion
 
+#pragma region 16 bit loads
 		//////// 16 - bit loads ////////
 		// LD n,nn --> n is two-byte register, nn is 2 byte immediate value
 	case 0x01:
@@ -219,6 +226,9 @@ int HandleOps(unsigned char* programCode) {
 	case 0xE1:
 		return 0;
 
+#pragma endregion
+
+#pragma region 8 bit ALU
 		//////// 8 - bit ALU ////////
 		// ADD A,n --> n is a register or #
 	case 0x87:
@@ -343,7 +353,9 @@ int HandleOps(unsigned char* programCode) {
 	case 0x2D:
 	case 0x35:
 		return 0;
+#pragma endregion
 
+#pragma region 16 bit ALU
 		//////// 16 - bit ALU ////////
 		// ADD HL,n --> n is a register pair
 	case 0x09:
@@ -370,6 +382,9 @@ int HandleOps(unsigned char* programCode) {
 	case 0x3B:
 		return 0;
 
+#pragma endregion
+
+#pragma region Miscellaneous
 		//////// Miscellaneous ////////
 		// SWAP n --> n is a register
 	case 0xCB37:
@@ -399,7 +414,9 @@ int HandleOps(unsigned char* programCode) {
 		// EI
 	case 0xFB:
 		return 0;
+#pragma endregion
 
+#pragma region Rotates and Shifts
 		//////// Rotates and Shifts ////////
 		// RLCA
 	case 0x07:
@@ -473,7 +490,9 @@ int HandleOps(unsigned char* programCode) {
 	case 0xCB3D:
 	case 0xCB3E:
 		return 0;
+#pragma endregion
 
+#pragma region Bit Opcodes
 		//////// Bit Opcodes ////////
 		// BIT b,r --> b is a byte, r is a register
 	case 0xCB47:
@@ -508,6 +527,9 @@ int HandleOps(unsigned char* programCode) {
 	case 0xCB86:
 		return 1;
 
+#pragma endregion
+
+#pragma region Jumps
 		//////// Jumps ////////
 		// JP nn --> nn is a 2 byte immediate value (LS byte first)
 	case 0xC3:
@@ -535,6 +557,9 @@ int HandleOps(unsigned char* programCode) {
 	case 0x38:
 		return 1;
 
+#pragma endregion
+
+#pragma region Calls
 		//////// Calls ////////
 		// CALL nn --> nn is 2 byte immediate value (LS byte first)
 	case 0xCD:
@@ -546,7 +571,9 @@ int HandleOps(unsigned char* programCode) {
 	case 0xD4:
 	case 0xDC:
 		return 2;
+#pragma endregion
 
+#pragma region Restarts
 		//////// Restarts ////////
 		// RST n --> n is a restart address
 	case 0xC7:
@@ -559,6 +586,9 @@ int HandleOps(unsigned char* programCode) {
 	case 0xFF:
 		return 0;
 
+#pragma endregion
+
+#pragma region Returns
 		//////// Returns ////////
 		// RET
 	case 0xc9:
@@ -570,6 +600,6 @@ int HandleOps(unsigned char* programCode) {
 		// RETI
 	case 0xD9:
 		return 0;
-
+#pragma endregion
 	}
 }
