@@ -3,7 +3,13 @@ typedef struct _GB_CPU {
 	union {
 		struct {
 			unsigned char rA;
-			unsigned char rF;
+			struct {
+				unsigned int Z : 1;
+				unsigned int N : 1;
+				unsigned int H : 1;
+				unsigned int C : 1;
+				unsigned int reserved : 4;
+			} rF;
 		};
 		unsigned short rAF;
 	};
@@ -34,4 +40,5 @@ typedef struct _GB_CPU {
 
 	unsigned short rPC;
 	unsigned short rSP;
+	
 } GB_CPU, *PGB_CPU;
